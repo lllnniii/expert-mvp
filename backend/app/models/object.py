@@ -14,4 +14,4 @@ class Object(Base):
     client = relationship("Client", back_populates="object")
 
     def __repr__(self):
-        return "<Client %r>" % self.client_name
+        return "<Object %r>" % self.object_id

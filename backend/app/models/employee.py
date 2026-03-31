@@ -12,7 +12,7 @@ class Employee(Base):
     phone_number = Column(String(255))
     address = Column(String(255))
 
-    roles = relationship("Role", back_populates="employee")
+    role = relationship("Role", back_populates="employee")
     account = relationship("Account", back_populates="employee")
 
     def __repr__(self):
