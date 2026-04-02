@@ -2,12 +2,12 @@ from sqlalchemy import Column, Integer, String
 from sqlalchemy.orm import relationship
 from ..database import Base
 
-class Role(Base):
-    __tablename__ = "role"
+class Roles(Base):
+    __tablename__ = "roles"
     role_id = Column(Integer, primary_key=True, index=True)
     name = Column(String(255), nullable=False)
 
-    employee = relationship("Employee", back_populates="role")
+    employee = relationship("Employees", back_populates="roles")
 
     def __repr__(self):
-        return f"<Role {self.name}>"
+        return f"<Roles {self.name}>"
