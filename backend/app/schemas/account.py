@@ -20,3 +20,7 @@ class AccountResponse(BaseModel):
 
 class AccountCreate(AccountBase):
     pass
+
+class AccountUpdate(AccountBase):
+    pass
+

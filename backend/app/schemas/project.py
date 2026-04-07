@@ -40,3 +40,6 @@ class ProjectListResponse(BaseModel):
 
 class ProjectCreate(ProjectBase):
     pass
+
+class ProjectUpdate(ProjectBase):
+    pass

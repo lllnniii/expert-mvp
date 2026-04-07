@@ -30,5 +30,8 @@ class EmployeeResponse(BaseModel):
     class Config:
         from_attributes = True
 
+class EmployeeUpdate(EmployeeBase):
+    pass
+
 class EmployeeListResponse(BaseModel):
     employees : list[EmployeeResponse]

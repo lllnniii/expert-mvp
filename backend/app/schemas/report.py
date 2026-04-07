@@ -19,3 +19,8 @@ class ReportResponse(ReportBase):
 
 class ReportListResponse(BaseModel):
     reports: list[ReportResponse]
+
+class ReportUpdate(BaseModel):
+    number: Optional[str] = None
+    validity_period: Optional[str] = None
+    description: Optional[str] = None

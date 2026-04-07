@@ -12,9 +12,14 @@ class ObjectBase(BaseModel):
 class ObjectCreate(ObjectBase):
     pass
 
-
 class ObjectResponse(ObjectBase):
     object_id: int
 
     class Config:
         from_attributes = True
+
+class ObjectUpdate(BaseModel):
+    object_name: Optional[str] = None
+    object_address: Optional[str] = None
+    opos_category: Optional[str] = None
+    description: Optional[str] = None

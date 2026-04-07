@@ -27,3 +27,6 @@ class ClientResponse(BaseModel):
 
 class ClientCreate(ClientBase):
     pass
+
+class ClientUpdate(ClientBase):
+    pass

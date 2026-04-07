@@ -8,7 +8,7 @@ PaymentStatus = Literal["ожидает оплаты", "оплачен", "час
 
 class PaymentBase(BaseModel):
     project_id: int
-    amount: Decimal = Field(..., gt=0)
+    amount: Decimal
     date: Optional[date] = None
     status: PaymentStatus = "ожидает оплаты"
 
@@ -21,3 +21,6 @@ class PaymentResponse(PaymentBase):
 
     class Config:
         from_attributes = True
+
+class PaymentUpdate(PaymentBase):
+    pass
