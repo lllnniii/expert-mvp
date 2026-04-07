@@ -23,3 +23,7 @@ class ObjectUpdate(BaseModel):
     object_address: Optional[str] = None
     opos_category: Optional[str] = None
     description: Optional[str] = None
+
+class ObjectListResponses(BaseModel):
+    objects : list[ObjectResponse]
+    total : int

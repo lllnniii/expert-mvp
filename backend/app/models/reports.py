@@ -11,7 +11,7 @@ class Reports(Base):
     description = Column(String(255))
 
     projects = relationship("Projects", back_populates="reports")
-    employee_reports = relationship("EmployeeReport", back_populates="reports")
+    employee_reports = relationship("EmployeeReports", back_populates="reports")
 
     def __repr__(self):
         return f"<Reports: {self.report_id}>"

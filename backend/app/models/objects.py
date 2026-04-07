@@ -11,7 +11,7 @@ class Objects(Base):
     opos_category = Column(String(255))
     description = Column(String)
 
-    client = relationship("Clients", back_populates="objects")
+    clients = relationship("Clients", back_populates="objects")
 
     def __repr__(self):
         return "<Objects %r>" % self.object_id

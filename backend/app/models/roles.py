@@ -7,7 +7,7 @@ class Roles(Base):
     role_id = Column(Integer, primary_key=True, index=True)
     name = Column(String(255), nullable=False)
 
-    employee = relationship("Employees", back_populates="roles")
+    employees = relationship("Employees", back_populates="roles")
 
     def __repr__(self):
         return f"<Roles {self.name}>"
