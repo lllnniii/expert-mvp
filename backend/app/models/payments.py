@@ -6,7 +6,7 @@ class Payments(Base):
     __tablename__ = "payments"
     payment_id = Column(Integer, primary_key=True, index=True)
     project_id = Column(Integer, ForeignKey('projects.project_id'))
-    amount = Column(Numeric)
+    amount = Column(Numeric(10,2))
     date = Column(Date)
     status = Column(String)
 

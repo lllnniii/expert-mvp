@@ -21,7 +21,7 @@ class EmployeeResponse(BaseModel):
     account_id : int
     role_id : int
     full_name : str
-    certification_info : str
+    certification_info : Optional[str]
     phone_number : Optional[str]
     address : Optional[str]
     role : RoleResponse
