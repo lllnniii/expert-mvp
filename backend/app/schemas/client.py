@@ -13,7 +13,7 @@ class ClientBase(BaseModel):
 
 
 class ClientResponse(BaseModel):
-    id: int = Field(..., description="UNIQUE ID")
+    client_id: int = Field(..., description="UNIQUE ID")
     client_name : str
     full_name : str
     inn : str
@@ -22,8 +22,10 @@ class ClientResponse(BaseModel):
     contact_person : Optional[str]
     contact_phone : Optional[str]
     contact_email : Optional[EmailStr]
-    class Config:
-        from_attributes = True
+
+    model_config = {
+        "from_attributes": True
+    }
 
 class ClientCreate(ClientBase):
     pass

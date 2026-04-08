@@ -20,7 +20,7 @@ def get_role_by_name(role_name: str, db: Session = Depends(get_db)):
     service = RoleService(db)
     return service.get_by_name(role_name)
 
-@router.post("/", response_model=RoleResponse, status_code=status.HTTP_201_CREATED)
+@router.post("", response_model=RoleResponse, status_code=status.HTTP_201_CREATED)
 def create_role(role: RoleCreate, db: Session = Depends(get_db)):
     service = RoleService(db)
     return service.create_role(role)

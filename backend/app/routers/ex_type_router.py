@@ -20,7 +20,7 @@ def get_type_by_name(type_name: str, db: Session = Depends(get_db)):
     service = ExpertiseTypeService(db)
     return service.get_by_name(type_name)
 
-@router.post("/", response_model=ExpertiseTypeResponse, status_code=status.HTTP_201_CREATED)
+@router.post("", response_model=ExpertiseTypeResponse, status_code=status.HTTP_201_CREATED)
 def create_type(type: ExpertiseTypeCreate, db: Session = Depends(get_db)):
     service = ExpertiseTypeService(db)
     return service.create_type(type)
