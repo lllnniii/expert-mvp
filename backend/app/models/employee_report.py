@@ -6,7 +6,7 @@ class EmployeeReports(Base):
     __tablename__ = "employee_reports"
     id = Column(Integer, primary_key=True)
     employee_id = Column(Integer, ForeignKey('employees.employee_id'))
-    report_id = Column(Integer, ForeignKey('reports.reports_id'))
+    report_id = Column(Integer, ForeignKey('reports.report_id'))
 
     employees = relationship("Employees", back_populates="employee_reports")
     reports = relationship("Reports", back_populates="employee_reports")

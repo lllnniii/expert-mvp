@@ -15,6 +15,7 @@ class Employees(Base):
     roles = relationship("Roles", back_populates="employees")
     accounts = relationship("Accounts", back_populates="employees")
     employee_reports = relationship("EmployeeReports", back_populates="employees")
+    projects = relationship("Projects", back_populates="employees")
 
     def __repr__(self):
         return f"<Employees {self.full_name}>"

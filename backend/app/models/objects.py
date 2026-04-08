@@ -12,6 +12,7 @@ class Objects(Base):
     description = Column(String)
 
     clients = relationship("Clients", back_populates="objects")
+    projects = relationship("Projects", back_populates="objects")
 
     def __repr__(self):
         return "<Objects %r>" % self.object_id
