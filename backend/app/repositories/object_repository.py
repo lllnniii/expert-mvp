@@ -9,14 +9,14 @@ class ObjectRepository:
         self.db = db
 
     def get_all(self) -> List[Objects]:
-        stmt = (select(Objects).options(joinedload(Objects.client)))
+        stmt = (select(Objects).options(joinedload(Objects.clients)))
         result = self.db.execute(stmt)
         return list(result.scalars().all())
 
     def get_by_object_id(self, object_id: int) -> Optional[Objects]:
         slct = ((select(Objects).
                 where(Objects.object_id == object_id)).
-                options(joinedload(Objects.client)))
+                options(joinedload(Objects.clients)))
         result = self.db.execute(slct)
         return result.scalars().first()
 
@@ -28,7 +28,7 @@ class ObjectRepository:
     def get_by_object_name(self, object_name: str) -> Optional[Objects]:
         slct = (select(Objects).
                 where(func.lower(Objects.object_name) == object_name.lower()).
-                options(joinedload(Objects.client)))
+                options(joinedload(Objects.clients)))
         result = self.db.execute(slct)
         return result.scalars().first()
 

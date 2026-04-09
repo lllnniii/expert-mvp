@@ -30,5 +30,12 @@ class ClientResponse(BaseModel):
 class ClientCreate(ClientBase):
     pass
 
-class ClientUpdate(ClientBase):
-    pass
+class ClientUpdate(BaseModel):
+    client_name: Optional[str] = Field(None, min_length=4, max_length=70)
+    full_name: Optional[str] = Field(None, max_length=255)
+    inn: Optional[str] = Field(None, max_length=255)
+    address_legal: Optional[str] = Field(None, max_length=255)
+    address_actual: Optional[str] = Field(None, max_length=255)
+    contact_person: Optional[str] = Field(None, max_length=255)
+    contact_phone: Optional[str] = Field(None, max_length=255)
+    contact_email: Optional[EmailStr] = Field(None, max_length=255)
