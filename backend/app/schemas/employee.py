@@ -30,8 +30,14 @@ class EmployeeResponse(BaseModel):
     class Config:
         from_attributes = True
 
-class EmployeeUpdate(EmployeeBase):
-    pass
+class EmployeeUpdate(BaseModel):
+    account_id: Optional[int] = Field(None, description="Account ID")
+    role_id: Optional[int] = Field(None, description="Role ID")
+    full_name: Optional[str] = Field(None, min_length=2, max_length=255,
+                           description="Full name of the employee")
+    certification_info: Optional[str] = Field(None, description="Certification information of the employee")
+    phone_number: Optional[str] = Field(None, description="Employee's phone")
+    address: Optional[str] = Field(None, description="Employee's address")
 
 class EmployeeListResponse(BaseModel):
     employees : list[EmployeeResponse]
