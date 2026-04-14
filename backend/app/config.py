@@ -10,24 +10,29 @@ class Settings(BaseSettings):
     DB_PASSWORD: str
     DB_NAME: str
     DB_HOST: str
-    DB_PORT: int = 5432
+    DB_PORT: int
+
+    JWT_SECRET : str
+    JWT_EXPIRE_MINUTES: int
 
     cors_allowed_origins: str = "*"
     static_dir: str = "static"
-    # SECRET_KEY: str
-    # ALGORITHM: str = "HS256"
-    # ACCESS_TOKEN_EXPIRE_MINUTES: int = 480
+
 
     @property
     def database_url(self) -> str:
         if self.USE_SQLITE:
-            # SQLite создаст файл local_db.db в корне папки backend
             return "sqlite:///./local_db.db"
+        return(
+            f"postgresql://{self.DB_USER}:{self.DB_PASSWORD}@{self.DB_HOST}:{self.DB_PORT}/{self.DB_NAME}")
+        # return (
+        #     f"postgresql+asyncpg://{self.DB_USER}:{self.DB_PASSWORD}@{self.DB_HOST}:{self.DB_PORT}/{self.DB_NAME}"
+        # )
+    # def sqlalchemy_url(self) -> str:
+    #     return (
+    #         f"postgresql+psycopg2://{self.DB_USER}:{self.DB_PASSWORD}@{self.DB_HOST}:{self.DB_PORT}/{self.DB_NAME}"
+    #     )
 
-        return (
-            f"postgresql://{self.DB_USER}:{self.DB_PASSWORD}"
-            f"@{self.DB_HOST}:{self.DB_PORT}/{self.DB_NAME}"
-        )
 
     class Config:
         env_file = ".env"
