@@ -9,7 +9,7 @@ class AccountBase(BaseModel):
 
 
 class AccountResponse(BaseModel):
-    id: int = Field(..., description="UNIQUE ID")
+    account_id: int = Field(..., description="UNIQUE ID")
     username: str
     is_active: bool
     created_at: date
@@ -22,5 +22,7 @@ class AccountCreate(AccountBase):
     pass
 
 class AccountUpdate(AccountBase):
+    pass
+class AccountLogin(AccountBase):
     pass
 

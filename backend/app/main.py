@@ -6,8 +6,7 @@ from starlette.responses import HTMLResponse
 from . import models
 from .config import settings
 from .database import init_db
-from .routers import client_router, role_router, ex_type_router, object_router
-
+from .routers import client_router, role_router, ex_type_router, object_router, account_auth_router
 
 app = FastAPI(
     title=settings.app_name,
@@ -33,6 +32,7 @@ app.include_router(client_router.router)
 app.include_router(role_router.router)
 app.include_router(ex_type_router.router)
 app.include_router(object_router.router)
+app.include_router(account_auth_router.router)
 
 @app.on_event("startup")
 def on_startup():

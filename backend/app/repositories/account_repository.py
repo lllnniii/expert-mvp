@@ -1,8 +1,9 @@
 from sqlalchemy.orm import Session
-from sqlalchemy import func, select
+from sqlalchemy import select
 from typing import List, Optional
 from ..models.accounts import Accounts
 from ..schemas.account import AccountCreate
+
 
 class AccountRepository():
     def __init__(self, db: Session):
