@@ -3,10 +3,10 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from starlette.responses import HTMLResponse
 
-from . import models
-from .config import settings
-from .database import init_db
-from .routers import client_router, role_router, ex_type_router, object_router, account_auth_router
+import backend.app.models
+from backend.app.config import settings
+from backend.app.database import init_db
+from backend.app.routers import client_router, role_router, ex_type_router, object_router, account_auth_router
 
 app = FastAPI(
     title=settings.app_name,

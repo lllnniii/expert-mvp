@@ -12,7 +12,7 @@ class Accounts(Base):
     created_at = Column(Date, default=date.today)
     last_login_at = Column(Date)
 
-    employees = relationship("Employees", back_populates="accounts")
+    employees = relationship("Employees", back_populates="accounts", uselist=False)
 
     def __repr__(self):
         return f"<Accounts {self.username}>"
