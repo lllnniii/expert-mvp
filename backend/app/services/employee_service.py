@@ -9,6 +9,7 @@ from fastapi import HTTPException, status
 class EmployeeService:
     def __init__(self, db : Session):
         self.repository = EmployeeRepository(db)
+        self.db = db
 
     def get_all_employees(self) -> List[EmployeeResponse]:
         employees = self.repository.get_all()
@@ -53,3 +54,13 @@ class EmployeeService:
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
                 detail=f"Employee with id {employee_id} not found")
         return None
+
+    def link_account(self, employee_id: int, account_id: int):
+        employee = self.repository.get_by_employee_id(employee_id)
+        if not employee:
+            raise HTTPException(404, "Employee not found")
+        if employee.account_id:
+            raise HTTPException(400, "Employee already linked")
+        self.repository.set_account(employee, account_id)
+        self.db.commit()
+        return {"detail": "Linked"}

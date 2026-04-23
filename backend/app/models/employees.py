@@ -5,7 +5,7 @@ from backend.app.database import Base
 class Employees(Base):
     __tablename__ = "employees"
     employee_id = Column(Integer, primary_key=True, index=True)
-    account_id = Column(Integer, ForeignKey('accounts.account_id'), index=True)
+    account_id = Column(Integer, ForeignKey('accounts.account_id'), index=True, nullable=True, unique=True)
     role_id = Column(Integer, ForeignKey('roles.role_id'), index=True)
     full_name = Column(String(255), nullable=False)
     certification_info = Column(String(255))

@@ -24,8 +24,8 @@ class EmployeeResponse(BaseModel):
     certification_info : Optional[str]
     phone_number : Optional[str]
     address : Optional[str]
-    role : RoleResponse
-    account : AccountResponse
+    roles : RoleResponse
+    accounts : Optional[AccountResponse] = None
 
     class Config:
         from_attributes = True

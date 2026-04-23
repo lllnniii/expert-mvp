@@ -29,6 +29,14 @@ def create_employee(data : EmployeeCreate,db: Session = Depends(get_db)):
     service = EmployeeService(db)
     return service.create_employee(data)
 
+@router.post("/{employee_id}/link-account")
+def link_account(employee_id: int, account_id: int, db: Session = Depends(get_db)):
+    # тут надо сделать проыерку на роль но я не хочу пока делать роли
+    # так что пожалуйста не жалуйтесь на мою безопасность...
+
+    service = EmployeeService(db)
+    return service.link_account(employee_id, account_id)
+
 @router.patch("/{employee_id}", response_model=EmployeeResponse, status_code=status.HTTP_200_OK)
 def update_employee_by_id(employee_id: int, data: EmployeeUpdate, db: Session = Depends(get_db)):
     service = EmployeeService(db)

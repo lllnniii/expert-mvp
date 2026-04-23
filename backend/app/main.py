@@ -6,7 +6,8 @@ from starlette.responses import HTMLResponse
 import backend.app.models
 from backend.app.config import settings
 from backend.app.database import init_db
-from backend.app.routers import client_router, role_router, ex_type_router, object_router, account_auth_router
+from backend.app.routers import (client_router, role_router, ex_type_router, object_router, account_auth_router,
+                                 employee_router)
 
 app = FastAPI(
     title=settings.app_name,
@@ -33,6 +34,7 @@ app.include_router(role_router.router)
 app.include_router(ex_type_router.router)
 app.include_router(object_router.router)
 app.include_router(account_auth_router.router)
+app.include_router(employee_router.router)
 
 @app.on_event("startup")
 def on_startup():
