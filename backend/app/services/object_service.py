@@ -1,9 +1,9 @@
 from sqlalchemy.orm import Session
 from sqlalchemy.exc import IntegrityError
 from typing import List, Optional
-from ..repositories.object_repository import ObjectRepository
-from ..repositories.client_repositories import ClientRepository
-from ..schemas.object import ObjectResponse, ObjectCreate, ObjectUpdate, ObjectListResponses
+from backend.app.repositories.object_repository import ObjectRepository
+from backend.app.repositories.client_repositories import ClientRepository
+from backend.app.schemas.object import ObjectResponse, ObjectCreate, ObjectUpdate, ObjectListResponses
 from fastapi import HTTPException,status
 
 class ObjectService:
@@ -56,7 +56,7 @@ class ObjectService:
         except IntegrityError:
             raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
                 detail="Database integrity violation")
-        except Exception as e:
+        except HTTPException  as e:
             raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
                 detail=f"Error creating object: {str(e)}")
 

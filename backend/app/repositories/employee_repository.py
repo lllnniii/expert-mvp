@@ -1,8 +1,8 @@
 from sqlalchemy.orm import Session
 from sqlalchemy import select
 from typing import List, Optional
-from ..models.employees import Employees
-from ..schemas.employee import EmployeeCreate, EmployeeUpdate
+from backend.app.models.employees import Employees
+from backend.app.schemas.employee import EmployeeCreate, EmployeeUpdate
 
 class EmployeeRepository():
     def __init__(self, db: Session):

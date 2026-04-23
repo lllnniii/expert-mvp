@@ -1,9 +1,9 @@
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 from typing import List
-from ..models.clients import Clients
-from ..repositories.client_repositories import ClientRepository
-from ..schemas.client import ClientResponse, ClientCreate, ClientUpdate
+from backend.app.models.clients import Clients
+from backend.app.repositories.client_repositories import ClientRepository
+from backend.app.schemas.client import ClientResponse, ClientCreate, ClientUpdate
 from fastapi import HTTPException, status
 
 class ClientService:
@@ -40,7 +40,7 @@ class ClientService:
             raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
                 detail="Client with this data already exists or violates constraints"
             )
-        except Exception as e:
+        except HTTPException as e:
             raise HTTPException(
                 status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
                 detail=f"An unexpected error occurred: {str(e)}"

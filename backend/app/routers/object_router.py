@@ -1,9 +1,9 @@
 from fastapi import APIRouter, Depends, status
 from sqlalchemy.orm import Session
 from typing import List
-from ..database import get_db
-from ..services.object_service import ObjectService
-from ..schemas.object import ObjectResponse, ObjectUpdate, ObjectCreate
+from backend.app.database import get_db
+from backend.app.services.object_service import ObjectService
+from backend.app.schemas.object import ObjectResponse, ObjectUpdate, ObjectCreate
 
 router = APIRouter(
     prefix="/api/objects",

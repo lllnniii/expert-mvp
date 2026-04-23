@@ -1,7 +1,7 @@
 from pydantic import BaseModel, Field
 from typing import Optional
-from .role import  RoleResponse
-from .account import AccountResponse
+from backend.app.schemas.role import  RoleResponse
+from backend.app.schemas.account import AccountResponse
 
 class EmployeeBase(BaseModel):
     account_id : int = Field(..., description="Account ID")

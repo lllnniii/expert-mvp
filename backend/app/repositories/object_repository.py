@@ -1,8 +1,8 @@
 from sqlalchemy.orm import Session, joinedload
 from sqlalchemy import func, select
 from typing import List, Optional
-from ..models.objects import Objects
-from ..schemas.object import ObjectCreate, ObjectUpdate
+from backend.app.models.objects import Objects
+from backend.app.schemas.object import ObjectCreate, ObjectUpdate
 
 class ObjectRepository:
     def __init__(self, db: Session):

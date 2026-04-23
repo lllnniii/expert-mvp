@@ -1,9 +1,9 @@
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 from typing import List
-from ..models.employees import Employees
-from ..repositories.employee_repository import EmployeeRepository
-from ..schemas.employee import EmployeeResponse, EmployeeCreate, EmployeeUpdate
+from backend.app.models.employees import Employees
+from backend.app.repositories.employee_repository import EmployeeRepository
+from backend.app.schemas.employee import EmployeeResponse, EmployeeCreate, EmployeeUpdate
 from fastapi import HTTPException, status
 
 class EmployeeService:
@@ -35,7 +35,7 @@ class EmployeeService:
         except IntegrityError:
             raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
                 detail="Employee with this data already exists or violates constraints")
-        except Exception as e:
+        except HTTPException  as e:
             raise HTTPException(
                 status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
                 detail=f"An unexpected error occurred: {str(e)}")

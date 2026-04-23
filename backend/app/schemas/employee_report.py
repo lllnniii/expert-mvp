@@ -1,6 +1,6 @@
 from pydantic import BaseModel
-from .employee import EmployeeResponse
-from .report import ReportResponse
+from backend.app.schemas.employee import EmployeeResponse
+from backend.app.schemas.report import ReportResponse
 
 class EmployeeReportBase(BaseModel):
     employee_id: int

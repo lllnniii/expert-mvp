@@ -1,9 +1,9 @@
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 from typing import List
-from ..models.expertise_types import ExpertiseTypes
-from ..repositories.ex_type_repository import ExpertiseTypeRepository
-from ..schemas.expertise_type import ExpertiseTypeResponse, ExpertiseTypeCreate
+from backend.app.models.expertise_types import ExpertiseTypes
+from backend.app.repositories.ex_type_repository import ExpertiseTypeRepository
+from backend.app.schemas.expertise_type import ExpertiseTypeResponse, ExpertiseTypeCreate
 from fastapi import HTTPException, status
 
 class ExpertiseTypeService:
@@ -33,7 +33,7 @@ class ExpertiseTypeService:
             raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
                 detail="Type with this data already exists or violates constraints"
             )
-        except Exception as e:
+        except HTTPException  as e:
             raise HTTPException(
                 status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
                 detail=f"An unexpected error occurred: {str(e)}"

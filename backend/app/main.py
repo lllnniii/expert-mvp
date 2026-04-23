@@ -26,7 +26,7 @@ app.mount("/static", StaticFiles(directory=settings.static_dir), name="static")
 
 @app.get("/")
 def root():
-    return {"message": "Welcome to my test page"}
+    return {"message": "оч советую перейти на /api/docs"}
 
 app.include_router(client_router.router)
 app.include_router(role_router.router)

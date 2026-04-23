@@ -1,9 +1,9 @@
 from fastapi import APIRouter, Depends, status
 from sqlalchemy.orm import Session
 from typing import List
-from ..database import get_db
-from ..services.client_service import ClientService
-from ..schemas.client import ClientResponse, ClientUpdate, ClientCreate
+from backend.app.database import get_db
+from backend.app.services.client_service import ClientService
+from backend.app.schemas.client import ClientResponse, ClientUpdate, ClientCreate
 
 router = APIRouter(
     prefix="/api/clients",

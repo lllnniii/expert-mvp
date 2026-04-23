@@ -1,8 +1,8 @@
 from sqlalchemy.orm import Session
 from sqlalchemy import func, select
 from typing import List, Optional
-from ..models.roles import Roles
-from ..schemas.role import RoleCreate
+from backend.app.models.roles import Roles
+from backend.app.schemas.role import RoleCreate
 
 class RoleRepository():
     def __init__(self, db: Session):

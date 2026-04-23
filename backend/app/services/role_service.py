@@ -1,9 +1,9 @@
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 from typing import List
-from ..models.roles import Roles
-from ..repositories.role_repository import RoleRepository
-from ..schemas.role import RoleCreate, RoleResponse
+from backend.app.models.roles import Roles
+from backend.app.repositories.role_repository import RoleRepository
+from backend.app.schemas.role import RoleCreate, RoleResponse
 from fastapi import HTTPException, status
 
 class RoleService:
@@ -33,7 +33,7 @@ class RoleService:
             raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
                 detail="Role with this data already exists or violates constraints"
             )
-        except Exception as e:
+        except HTTPException  as e:
             raise HTTPException(
                 status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
                 detail=f"An unexpected error occurred: {str(e)}"
