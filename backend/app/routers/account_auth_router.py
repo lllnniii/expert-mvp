@@ -9,9 +9,8 @@ from fastapi.security import OAuth2PasswordRequestForm
 
 router = APIRouter(
     prefix="/account",
-    tags=["account"]
-)
-COOKIE_MAX_AGE = 60 * 480
+    tags=["account"])
+
 
 @router.post("/register", response_model=AccountResponse,
              status_code=status.HTTP_201_CREATED)
@@ -22,31 +21,6 @@ def register(account_data: AccountCreate, db: Session = Depends(get_db)):
         password=account_data.hashed_password
     )
 
-# @router.post("/login")
-# def login(account_data: AccountLogin,
-#           response: Response,
-#           db: Session = Depends(get_db)):
-#     service = AccountService(db)
-#     token = service.login(
-#         username=account_data.username,
-#         password=account_data.hashed_password
-#     )
-#     response.set_cookie(
-#         key="access_token",
-#         value=token,
-#         httponly=True,
-#         samesite="lax",
-#         max_age=COOKIE_MAX_AGE)
-#     return {"message": "LOg in"}
-#
-# @router.post("/logout")
-# def logout(response: Response):
-#     response.delete_cookie(key="access_token")
-#     return {"message": "Log out"}
-#
-# @router.get("/me", response_model=AccountResponse)
-# def get_me(current_account: Accounts = Depends(get_current_account)):
-#     return current_account
 
 @router.post("/login")
 def login(
@@ -91,3 +65,25 @@ def logout(
 @router.get("/me")
 def me(account: Accounts = Depends(get_current_account)):
     return account
+
+# @router.post("/login")
+# def login(account_data: AccountLogin,
+#           response: Response,
+#           db: Session = Depends(get_db)):
+#     service = AccountService(db)
+#     token = service.login(
+#         username=account_data.username,
+#         password=account_data.hashed_password
+#     )
+#     response.set_cookie(
+#         key="access_token",
+#         value=token,
+#         httponly=True,
+#         samesite="lax",
+#         max_age=COOKIE_MAX_AGE)
+#     return {"message": "LOg in"}
+#
+# @router.post("/logout")
+# def logout(response: Response):
+#     response.delete_cookie(key="access_token")
+#     return {"message": "Log out"}
