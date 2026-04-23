@@ -1,10 +1,11 @@
-from fastapi import APIRouter, Depends, Response, status
+from fastapi import APIRouter, Depends, Response, status, HTTPException, Body
 from sqlalchemy.orm import Session
 from ..database import get_db
 from ..core.dependencies import get_current_account
 from ..models.accounts import Accounts
 from ..schemas.account import AccountResponse, AccountCreate, AccountLogin
 from ..services.account_service import AccountService
+from fastapi.security import OAuth2PasswordRequestForm
 
 router = APIRouter(
     prefix="/account",
@@ -21,29 +22,72 @@ def register(account_data: AccountCreate, db: Session = Depends(get_db)):
         password=account_data.hashed_password
     )
 
+# @router.post("/login")
+# def login(account_data: AccountLogin,
+#           response: Response,
+#           db: Session = Depends(get_db)):
+#     service = AccountService(db)
+#     token = service.login(
+#         username=account_data.username,
+#         password=account_data.hashed_password
+#     )
+#     response.set_cookie(
+#         key="access_token",
+#         value=token,
+#         httponly=True,
+#         samesite="lax",
+#         max_age=COOKIE_MAX_AGE)
+#     return {"message": "LOg in"}
+#
+# @router.post("/logout")
+# def logout(response: Response):
+#     response.delete_cookie(key="access_token")
+#     return {"message": "Log out"}
+#
+# @router.get("/me", response_model=AccountResponse)
+# def get_me(current_account: Accounts = Depends(get_current_account)):
+#     return current_account
+
 @router.post("/login")
-def login(account_data: AccountLogin,
-          response: Response,
-          db: Session = Depends(get_db)):
+def login(
+    form_data: OAuth2PasswordRequestForm = Depends(),
+    db: Session = Depends(get_db)):
     service = AccountService(db)
-    token = service.login(
-        username=account_data.username,
-        password=account_data.hashed_password
-    )
-    response.set_cookie(
-        key="access_token",
-        value=token,
-        httponly=True,
-        samesite="lax",
-        max_age=COOKIE_MAX_AGE)
-    return {"message": "LOg in"}
+    access_token, refresh_token = service.login(
+        username=form_data.username,
+        password=form_data.password,)
+    return {
+        "access_token": access_token,
+        "refresh_token": refresh_token,
+        "token_type": "bearer"}
+
+
+@router.post("/refresh")
+def refresh(
+    refresh_token: str = Body(..., embed=True),
+    db: Session = Depends(get_db)):
+    service = AccountService(db)
+    try:
+        access_token, new_refresh_token = service.refresh_tokens_service(
+            refresh_token_value=refresh_token)
+    except Exception as e:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,
+                            detail=str(e))
+    return {
+        "access_token": access_token,
+        "refresh_token": new_refresh_token,
+        "token_type": "bearer"}
+
 
 @router.post("/logout")
-def logout(response: Response):
-    response.delete_cookie(key="access_token")
-    return {"message": "Log out"}
+def logout(
+    refresh_token: str = Body(..., embed=True),
+    db: Session = Depends(get_db)):
+    service = AccountService(db)
+    service.logout_service(refresh_token_value=refresh_token)
+    return {"detail": "Logged out"}
 
-@router.get("/me", response_model=AccountResponse)
-def get_me(current_account: Accounts = Depends(get_current_account)):
-    return current_account
 
+@router.get("/me")
+def me(account: Accounts = Depends(get_current_account)):
+    return account

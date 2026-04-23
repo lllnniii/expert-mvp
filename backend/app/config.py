@@ -14,6 +14,7 @@ class Settings(BaseSettings):
 
     JWT_SECRET : str
     JWT_EXPIRE_MINUTES: int
+    REFRESH_EXPIRE_DAYS: int
 
     cors_allowed_origins: str = "*"
     static_dir: str = "static"
