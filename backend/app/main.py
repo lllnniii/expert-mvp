@@ -7,7 +7,7 @@ import app.models
 from app.config import settings
 from app.database import init_db
 from app.routers import (client_router, role_router, ex_type_router, object_router, account_auth_router,
-                                 employee_router)
+                                 employee_router, project_router)
 
 app = FastAPI(
     title=settings.app_name,
@@ -35,6 +35,7 @@ app.include_router(ex_type_router.router)
 app.include_router(object_router.router)
 app.include_router(account_auth_router.router)
 app.include_router(employee_router.router)
+app.include_router(project_router.router)
 
 @app.on_event("startup")
 def on_startup():

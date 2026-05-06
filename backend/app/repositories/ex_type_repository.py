@@ -12,6 +12,11 @@ class ExpertiseTypeRepository():
         result = self.db.execute(select(ExpertiseTypes))
         return list(result.scalars().all())
 
+    def get_by_id(self, id: int) -> Optional[ExpertiseTypes]:
+        slct = select(ExpertiseTypes).where(ExpertiseTypes.expertise_type_id == id)
+        result = self.db.execute(slct)
+        return result.scalars().first()
+    
     def get_by_name(self, name: str) -> Optional[ExpertiseTypes]:
         slct = select(ExpertiseTypes).where(
             func.lower(ExpertiseTypes.name) == name.lower())

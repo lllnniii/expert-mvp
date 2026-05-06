@@ -28,15 +28,12 @@ class ProjectResponse(BaseModel):
     name: str
     status: ProjectStatus
     deadline: Optional[date] = None
-    employee: EmployeeResponse
-    expertise: ExpertiseTypeResponse
-    object: ObjectResponse
+    employees: EmployeeResponse
+    expertise_types: ExpertiseTypeResponse
+    objects: ObjectResponse
 
     class Config:
         from_attributes = True
-
-class ProjectListResponse(BaseModel):
-    projects: list[ProjectResponse]
 
 class ProjectCreate(ProjectBase):
     pass

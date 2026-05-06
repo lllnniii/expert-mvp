@@ -46,6 +46,6 @@ def update_object_by_id(object_id: int, data: ObjectUpdate, db: Session = Depend
     return service.update_object(object_id, data)
 
 @router.delete("/{object_id}", status_code=status.HTTP_204_NO_CONTENT)
-def delete_client_by_id(object_id: int, db: Session = Depends(get_db)):
+def delete_object_by_id(object_id: int, db: Session = Depends(get_db)):
     service = ObjectService(db)
     return service.delete_object(object_id)
