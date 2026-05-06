@@ -8,7 +8,7 @@ from app.services.account_service import AccountService
 from fastapi.security import OAuth2PasswordRequestForm
 
 router = APIRouter(
-    prefix="/api   /account",
+    prefix="/api/account",
     tags=["account"])
 
 

@@ -4,7 +4,7 @@ from app.schemas.role import  RoleResponse
 from app.schemas.account import AccountResponse
 
 class EmployeeBase(BaseModel):
-    account_id : int = Field(..., description="Account ID")
+    account_id : Optional[int] = Field(None, description="Account ID")
     role_id : int = Field(..., description="Role ID")
     full_name : str = Field(..., min_length=2, max_length=255,
                             description="Full name of the employee")
@@ -18,7 +18,7 @@ class EmployeeCreate(EmployeeBase):
 
 class EmployeeResponse(BaseModel):
     employee_id : int = Field(..., description="unique employee id")
-    account_id : int
+    account_id : Optional[int] = None
     role_id : int
     full_name : str
     certification_info : Optional[str]
@@ -31,7 +31,6 @@ class EmployeeResponse(BaseModel):
         from_attributes = True
 
 class EmployeeUpdate(BaseModel):
-    account_id: Optional[int] = Field(None, description="Account ID")
     role_id: Optional[int] = Field(None, description="Role ID")
     full_name: Optional[str] = Field(None, min_length=2, max_length=255,
                            description="Full name of the employee")
@@ -39,5 +38,3 @@ class EmployeeUpdate(BaseModel):
     phone_number: Optional[str] = Field(None, description="Employee's phone")
     address: Optional[str] = Field(None, description="Employee's address")
 
-class EmployeeListResponse(BaseModel):
-    employees : list[EmployeeResponse]

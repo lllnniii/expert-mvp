@@ -61,6 +61,11 @@ class EmployeeService:
             raise HTTPException(404, "Employee not found")
         if employee.account_id:
             raise HTTPException(400, "Employee already linked")
+        existing = self.repository.get_by_account_id(account_id)
+        if existing:
+            raise HTTPException(400, "Employee already linked")
+
         self.repository.set_account(employee, account_id)
         self.db.commit()
-        return {"detail": "Linked"}
+        self.db.refresh(employee)
+        return employee

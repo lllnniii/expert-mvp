@@ -23,9 +23,15 @@ class EmployeeRepository():
         result = self.db.execute(slct)
         return list(result.scalars().all())
 
+    def get_by_account_id(self, account_id: int):
+        slct = select(Employees).where(Employees.account_id == account_id)
+        result = self.db.execute(slct)
+        return result.scalars().first()
+
     def set_account(self, employee: Employees, account_id: int):
         employee.account_id = account_id
         self.db.flush()
+        return employee
 
     def create_employee(self, employee_data : EmployeeCreate) -> Employees:
         db_employee = Employees(**employee_data.model_dump())

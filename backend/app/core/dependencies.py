@@ -7,7 +7,7 @@ from app.models.accounts import Accounts
 from app.models.refresh_token import RefreshTokens
 # from app.models.employees import Employees
 
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/account/login")
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/api/account/login")
 
 def get_current_account(
         token: str = Depends(oauth2_scheme),

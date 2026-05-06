@@ -19,7 +19,7 @@ def get_employee_by_id(employee_id: int, db: Session = Depends(get_db)):
     service = EmployeeService(db)
     return service.get_employee_by_id(employee_id)
 
-@router.get("/by-name/{name}", response_model= EmployeeResponse, status_code=status.HTTP_200_OK)
+@router.get("/by-name/{name}", response_model= list[EmployeeResponse], status_code=status.HTTP_200_OK)
 def get_employee_by_name(name: str, db: Session = Depends(get_db)):
     service = EmployeeService(db)
     return service.get_employee_by_name(name)
