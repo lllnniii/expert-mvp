@@ -1,9 +1,9 @@
 from pydantic import BaseModel, Field
 from typing import Optional, Literal
 from datetime import date
-from backend.app.schemas.object import ObjectResponse
-from backend.app.schemas.expertise_type import ExpertiseTypeResponse
-from backend.app.schemas.employee import EmployeeResponse
+from app.schemas.object import ObjectResponse
+from app.schemas.expertise_type import ExpertiseTypeResponse
+from app.schemas.employee import EmployeeResponse
 
 
 ProjectStatus = Literal["в процессе", "завершен"]

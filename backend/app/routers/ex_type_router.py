@@ -1,9 +1,9 @@
 from fastapi import APIRouter, Depends, status
 from sqlalchemy.orm import Session
 from typing import List
-from backend.app.database import get_db
-from backend.app.services.ex_type_service import ExpertiseTypeService
-from backend.app.schemas.expertise_type import ExpertiseTypeResponse, ExpertiseTypeCreate
+from app.database import get_db
+from app.services.ex_type_service import ExpertiseTypeService
+from app.schemas.expertise_type import ExpertiseTypeResponse, ExpertiseTypeCreate
 
 router = APIRouter(
     prefix="/api/expertise_type",

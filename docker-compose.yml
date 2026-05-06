@@ -1,0 +1,22 @@
+services:
+  db:
+    image: postgres:16
+    container_name: sevos
+    env_file: .env
+    ports:
+      - "${POSTGRES_PORT}:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  app:
+    build: ./backend
+    ports:
+      - "8000:8000"
+    env_file: .env
+    depends_on:
+      - db
+    volumes:
+      - ./backend/app:/app/app
+
+volumes:
+  postgres_data:

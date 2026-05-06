@@ -1,8 +1,8 @@
 from sqlalchemy.orm import Session
 from sqlalchemy import select
 from typing import List, Optional
-from backend.app.models.accounts import Accounts
-from backend.app.schemas.account import AccountCreate
+from app.models.accounts import Accounts
+from app.schemas.account import AccountCreate
 
 
 class AccountRepository():

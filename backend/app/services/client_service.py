@@ -1,9 +1,9 @@
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 from typing import List
-from backend.app.models.clients import Clients
-from backend.app.repositories.client_repositories import ClientRepository
-from backend.app.schemas.client import ClientResponse, ClientCreate, ClientUpdate
+from app.models.clients import Clients
+from app.repositories.client_repositories import ClientRepository
+from app.schemas.client import ClientResponse, ClientCreate, ClientUpdate
 from fastapi import HTTPException, status
 
 class ClientService:

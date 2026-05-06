@@ -1,10 +1,10 @@
 from fastapi import APIRouter, Depends, Response, status, HTTPException, Body
 from sqlalchemy.orm import Session
-from backend.app.database import get_db
-from backend.app.core.dependencies import get_current_account
-from backend.app.models.accounts import Accounts
-from backend.app.schemas.account import AccountResponse, AccountCreate, AccountLogin
-from backend.app.services.account_service import AccountService
+from app.database import get_db
+from app.core.dependencies import get_current_account
+from app.models.accounts import Accounts
+from app.schemas.account import AccountResponse, AccountCreate, AccountLogin
+from app.services.account_service import AccountService
 from fastapi.security import OAuth2PasswordRequestForm
 
 router = APIRouter(

@@ -2,7 +2,7 @@ from datetime import datetime, timedelta, timezone
 from typing import Optional
 import bcrypt
 from jose import jwt, JWTError
-from backend.app.config import settings
+from app.config import settings
 import secrets
 
 

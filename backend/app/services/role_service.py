@@ -1,9 +1,9 @@
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 from typing import List
-from backend.app.models.roles import Roles
-from backend.app.repositories.role_repository import RoleRepository
-from backend.app.schemas.role import RoleCreate, RoleResponse
+from app.models.roles import Roles
+from app.repositories.role_repository import RoleRepository
+from app.schemas.role import RoleCreate, RoleResponse
 from fastapi import HTTPException, status
 
 class RoleService:

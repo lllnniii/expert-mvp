@@ -1,9 +1,9 @@
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 from typing import List
-from backend.app.models.expertise_types import ExpertiseTypes
-from backend.app.repositories.ex_type_repository import ExpertiseTypeRepository
-from backend.app.schemas.expertise_type import ExpertiseTypeResponse, ExpertiseTypeCreate
+from app.models.expertise_types import ExpertiseTypes
+from app.repositories.ex_type_repository import ExpertiseTypeRepository
+from app.schemas.expertise_type import ExpertiseTypeResponse, ExpertiseTypeCreate
 from fastapi import HTTPException, status
 
 class ExpertiseTypeService:

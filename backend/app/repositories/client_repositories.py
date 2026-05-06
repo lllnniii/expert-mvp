@@ -1,8 +1,8 @@
 from sqlalchemy.orm import Session
 from sqlalchemy import func, select
 from typing import List, Optional
-from backend.app.models.clients import Clients
-from backend.app.schemas.client import ClientCreate, ClientUpdate
+from app.models.clients import Clients
+from app.schemas.client import ClientCreate, ClientUpdate
 
 class ClientRepository():
     def __init__(self, db: Session):

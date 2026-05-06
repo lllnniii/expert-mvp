@@ -1,9 +1,9 @@
 from fastapi import APIRouter, Depends, status
 from sqlalchemy.orm import Session
 from typing import List
-from backend.app.database import get_db
-from backend.app.services.employee_service import EmployeeService
-from backend.app.schemas.employee import EmployeeResponse, EmployeeCreate, EmployeeUpdate
+from app.database import get_db
+from app.services.employee_service import EmployeeService
+from app.schemas.employee import EmployeeResponse, EmployeeCreate, EmployeeUpdate
 
 router = APIRouter(
     prefix="/api/employees",

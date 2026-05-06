@@ -1,8 +1,8 @@
 from sqlalchemy.orm import Session
 from sqlalchemy import func, select
 from typing import List, Optional
-from backend.app.models.expertise_types import ExpertiseTypes
-from backend.app.schemas.expertise_type import ExpertiseTypeCreate, ExpertiseTypeUpdate
+from app.models.expertise_types import ExpertiseTypes
+from app.schemas.expertise_type import ExpertiseTypeCreate, ExpertiseTypeUpdate
 
 class ExpertiseTypeRepository():
     def __init__(self, db: Session):

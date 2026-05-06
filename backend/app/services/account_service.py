@@ -1,13 +1,13 @@
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 from typing import List
-from backend.app.models.accounts import Accounts
-from backend.app.models.refresh_token import RefreshTokens
-from backend.app.repositories.account_repository import AccountRepository
-from backend.app.repositories.refresh_token import RefreshTokenRepository
-from backend.app.schemas.account import AccountResponse, AccountCreate
+from app.models.accounts import Accounts
+from app.models.refresh_token import RefreshTokens
+from app.repositories.account_repository import AccountRepository
+from app.repositories.refresh_token import RefreshTokenRepository
+from app.schemas.account import AccountResponse, AccountCreate
 from fastapi import HTTPException, status
-from backend.app.core.security import (hashed_password, verify_password, create_access_token,
+from app.core.security import (hashed_password, verify_password, create_access_token,
                              create_refresh_token, get_refresh_token_expiration)
 from datetime import datetime, timezone
 

@@ -2,7 +2,7 @@ from pydantic import BaseModel, Field
 from typing import Optional, Literal
 from datetime import date
 from decimal import Decimal
-from backend.app.schemas.project import ProjectResponse
+from app.schemas.project import ProjectResponse
 
 PaymentStatus = Literal["ожидает оплаты", "оплачен", "частично оплачен", "просрочен"]
 

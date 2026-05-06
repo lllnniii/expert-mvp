@@ -1,9 +1,9 @@
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 from typing import List
-from backend.app.models.employees import Employees
-from backend.app.repositories.employee_repository import EmployeeRepository
-from backend.app.schemas.employee import EmployeeResponse, EmployeeCreate, EmployeeUpdate
+from app.models.employees import Employees
+from app.repositories.employee_repository import EmployeeRepository
+from app.schemas.employee import EmployeeResponse, EmployeeCreate, EmployeeUpdate
 from fastapi import HTTPException, status
 
 class EmployeeService:

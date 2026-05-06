@@ -1,9 +1,9 @@
 from sqlalchemy.orm import Session
 from sqlalchemy.exc import IntegrityError
 from typing import List, Optional
-from backend.app.repositories.object_repository import ObjectRepository
-from backend.app.repositories.client_repositories import ClientRepository
-from backend.app.schemas.object import ObjectResponse, ObjectCreate, ObjectUpdate, ObjectListResponses
+from app.repositories.object_repository import ObjectRepository
+from app.repositories.client_repositories import ClientRepository
+from app.schemas.object import ObjectResponse, ObjectCreate, ObjectUpdate, ObjectListResponses
 from fastapi import HTTPException,status
 
 class ObjectService:

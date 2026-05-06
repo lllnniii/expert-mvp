@@ -1,7 +1,7 @@
 from datetime import datetime, timezone
 from sqlalchemy import select
 from sqlalchemy.orm import Session
-from backend.app.models.refresh_token import RefreshTokens
+from app.models.refresh_token import RefreshTokens
 
 
 class RefreshTokenRepository:

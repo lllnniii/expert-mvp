@@ -1,6 +1,6 @@
 from pydantic import BaseModel, Field
 from typing import Optional
-from backend.app.schemas.project import ProjectResponse
+from app.schemas.project import ProjectResponse
 
 class ReportBase(BaseModel):
     project_id: int
