@@ -7,6 +7,7 @@ export default defineNuxtConfig({
 	[
 		'@pinia/nuxt',
 		'@vueuse/nuxt',
+		'@regle/nuxt'
 	],
 
 	runtimeConfig:

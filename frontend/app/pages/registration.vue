@@ -10,8 +10,26 @@
 
 	const isLoading = ref(false);
 
+	const {
+		requiredField,
+		passwordField
+	} = useValidation();
+
+	const { r$ } = useRegle(form.value,
+		{
+			...requiredField('username', 'Логин обязателен'),
+			...passwordField()
+		}
+	);
+
 	const registration = async () =>
 	{
+
+		const { valid } = await r$.$validate();
+
+		if (!valid)
+			return;
+
 		isLoading.value = true;
 
 		try {
@@ -27,38 +45,67 @@
 
 <template>
 	<div class="wrapper">
-		<div class="form">
-			<input
+		<form class="form">
+			<div class="title">Регистрация</div>
+			<UiInput
 				type="text"
-				name=""
-				placeholder="Имя пользователя"
+				:error="r$.$errors.username[0]"
+				placeholder="Введите логин"
 				v-model="form.username"
-			>
-			<input
+			/>
+			<UiInput
 				type="password"
-				name=""
-				placeholder="Пароль"
+				:error="r$.$errors.password[0]"
+				placeholder="Введите пароль"
 				v-model="form.password"
-			>
-			<button
-				type="button"
-				class="button"
-				@click="registration"
-			>
-				Рега
-			</button>
-		</div>
+				@keyup.enter="registration"
+			/>
+			<div class="buttons">
+				<UiButton
+					@click="registration"
+					:disabled="isLoading"
+				>
+					Регистрация
+				</UiButton>
+				<UiButton to="/login" variant="dark">Вход</UiButton>
+			</div>
+		</form>
 	</div>
 </template>
 
 <style scoped lang='scss'>
 	.wrapper
 	{
-		width: 100%;
-		height: 100%;
+		flex-grow: 1;
 
 		display: flex;
 		align-items: center;
 		justify-content: center;
+	}
+
+	.title
+	{
+		color: $green;
+		font-size: 24px;
+		text-align: center;
+		font-weight: 500;
+	}
+
+	.form
+	{
+		row-gap: 20px;
+
+		display: flex;
+		align-items: center;
+		flex-direction: column;
+
+		.input-wr { width: 100%; }
+	}
+
+	.buttons
+	{
+		column-gap: 10px;
+
+		display: flex;
 	}
 </style>
