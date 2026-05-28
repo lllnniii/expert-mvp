@@ -17,13 +17,13 @@
 <template>
 	<UiButton
 		variant="gray"
-		@click="toggleMenu(isOpened)"
+		@click="toggleMenu(!isOpened)"
 	>
 		<div class="menu-button">
 			<div class="menu-icon">
-				<span></span>
-				<span></span>
-				<span></span>
+				<span />
+				<span />
+				<span />
 			</div>
 			<span class="label">Меню</span>
 		</div>
