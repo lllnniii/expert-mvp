@@ -18,7 +18,7 @@
 				type: String,
 				required: false,
 				default: 'green',
-				validator: (v) => ['dark', 'green'].includes(v)
+				validator: (v) => ['dark', 'gray', 'green'].includes(v)
 			}
 		}
 	);
@@ -44,11 +44,15 @@
 	{
 		width: max-content;
 		padding: 14px 20px;
+		column-gap: 10%;
 		line-height: 19px;
 		font-weight: 600;
 		border-radius: 10px;
 
-		@include tr(.3, opacity, box-shadow);
+		display: flex;
+		align-items: center;
+
+		@include tr(.3, opacity, box-shadow, background-color);
 
 		&:disabled
 		{
@@ -62,6 +66,19 @@
 			background-color: $green;
 
 			&:hover { opacity: 0.8; }
+		}
+
+		&--gray
+		{
+			color: $white;
+			box-shadow: inset 0 0 1px 1px $light-gray;
+			background-color: $dark-gray;
+
+			&:hover
+			{
+				box-shadow: inset 0 0 1px 1px darken($dark-gray, 1);
+				background-color: darken($dark-gray, 1);
+			}
 		}
 
 		&--dark

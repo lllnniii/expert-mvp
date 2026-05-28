@@ -16,6 +16,26 @@
 	transform: translateY(5px);
 };
 
+// Fade-left
+.fade-left-enter-active,
+.fade-left-leave-active
+{
+	@include tr(.4, opacity, transform);
+	transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+};
+
+.fade-left-enter-from
+{
+	opacity: 0;
+	transform: translateX(100%);
+};
+
+.fade-left-leave-to
+{
+	opacity: 0;
+	transform: translateX(0);
+};
+
 // Opacity
 .opacity-enter-active,
 .opacity-leave-active { @include tr(.3, opacity) };
