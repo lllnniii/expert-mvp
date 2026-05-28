@@ -1,5 +1,5 @@
 <script setup>
-	const props = defineProps(
+	defineProps(
 		{
 			isOpened:
 			{
@@ -17,7 +17,7 @@
 <template>
 	<UiButton
 		variant="gray"
-		@click="toggleMenu(!props.isOpened)"
+		@click="toggleMenu(isOpened)"
 	>
 		<div class="menu-button">
 			<div class="menu-icon">
