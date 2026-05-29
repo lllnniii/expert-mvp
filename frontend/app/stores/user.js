@@ -1,3 +1,5 @@
+import { userSerializer } from "~/utils/serializers/userSerializer";
+
 const { account } = useApi();
 
 export const useUserStore = defineStore('user', () =>
@@ -16,11 +18,25 @@ export const useUserStore = defineStore('user', () =>
 			return response;
 		}
 
+		const setUserData = (value) => user.value = value;
+
+		const getCurrentUser = async () =>
+		{
+			const response = await account.getCurrentUser();
+			setUserData(userSerializer(response));
+		}
+
+		const logout = async (refreshToken) => await account.logout(refreshToken);
+
 		return {
 			user,
 
+			setUserData,
+
 			login,
-			registration
+			logout,
+			registration,
+			getCurrentUser
 		}
 	}
 )

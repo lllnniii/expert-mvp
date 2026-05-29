@@ -1,6 +1,9 @@
 <script setup>
 	const userStore = useUserStore();
 
+	definePageMeta({ layout: 'unauth' });
+	useSeoMeta({ title: 'Вход' });
+
 	const form = ref(
 		{
 			username: '',
@@ -40,8 +43,10 @@
 			if (response.access_token)
 			{
 				const accessToken = useCookie('promTokenAccess');
+				const refreshToken = useCookie('promTokenRefresh');
 
-				accessToken.value = response.access_token;
+				accessToken.value  = response.access_token;
+				refreshToken.value = response.refresh_token;
 
 				navigateTo('/');
 			}

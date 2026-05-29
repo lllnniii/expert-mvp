@@ -6,17 +6,11 @@ export const useRequest = async (request, opts = {}) =>
 	const options =
 	{
 		baseURL: config.public.api,
-		headers:
-		{
-			'Authorization': token.value ? `Bearer ${token.value}` : null
-		},
+		headers: { 'Authorization': token.value ? `Bearer ${token.value}` : null },
 		...opts,
 	};
 
-	try
-	{
-		return await $fetch(request, options);
-	}
+	try { return await $fetch(request, options); }
 	catch (e)
 	{
 		const errorObject =

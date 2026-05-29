@@ -31,6 +31,8 @@
 				</UiButton>
 			</div>
 
+			<HeaderMenuUser />
+
 			<div class="body">
 				<div class="body-title-wrapper">
 					<span class="body-title">Разделы</span>

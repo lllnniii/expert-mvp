@@ -1,18 +1,5 @@
-<script setup>
-	const nuxtApp   = useNuxtApp();
-	const userStore = useUserStore();
-
-	useSeoMeta({ title: 'PromExpert' });
-
-	nuxtApp.hook("page:finish", () => getScrollWidth());
-
-	if (!userStore.user?.id)
-		await userStore.getCurrentUser();
-</script>
-
 <template>
 	<div class="default-layout">
-		<Header />
 		<main>
 			<Transition name="fade" mode="out-in">
 				<NuxtPage />

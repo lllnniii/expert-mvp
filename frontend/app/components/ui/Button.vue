@@ -52,7 +52,9 @@
 		display: flex;
 		align-items: center;
 
-		@include tr(.3, opacity, box-shadow, background-color);
+		@include tr(.3, opacity, box-shadow, background-color, transform);
+
+		&:hover { transform: translateY(2px); }
 
 		&:disabled
 		{

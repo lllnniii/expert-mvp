@@ -1,6 +1,9 @@
 <script setup>
 	const userStore = useUserStore();
 
+	definePageMeta({ layout: 'unauth' });
+	useSeoMeta({ title: 'Регистрация' });
+
 	const form = ref(
 		{
 			username  : '',
