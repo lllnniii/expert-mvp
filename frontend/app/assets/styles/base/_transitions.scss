@@ -36,6 +36,28 @@
 	transform: translateX(0);
 };
 
+// Fade top
+.toast-enter-active,
+.toast-leave-active
+{
+	@include tr(.4, opacity, transform, height, padding, margin-bottom);
+	transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+};
+
+.toast-enter-from
+{
+	opacity: 0;
+	transform: translateY(-100%);
+};
+
+.toast-leave-to
+{
+	height: 0;
+	opacity: 0;
+	padding: 0;
+	margin-bottom: 0;
+};
+
 // Opacity
 .opacity-enter-active,
 .opacity-leave-active { @include tr(.3, opacity) };

@@ -41,7 +41,7 @@
 			if (!response?.detail)
 				navigateTo('/login');
 		}
-		catch (err) { console.error(err.data.detail) }
+		catch (err) { useRequestError(err) }
 		finally { isLoading.value = false; }
 	}
 </script>

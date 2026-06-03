@@ -1,5 +1,5 @@
 <script setup>
-	const userStore = useUserStore();
+	const userStore   = useUserStore();
 
 	definePageMeta({ layout: 'unauth' });
 	useSeoMeta({ title: 'Вход' });
@@ -51,7 +51,7 @@
 				navigateTo('/');
 			}
 		}
-		catch (err) { console.error(err) }
+		catch (err) { useRequestError(err); }
 		finally { isLoading.value = false; }
 	}
 </script>

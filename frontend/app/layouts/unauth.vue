@@ -6,6 +6,10 @@
 			</Transition>
 		</main>
 	</div>
+
+	<Teleport to="body">
+		<Toaster />
+	</Teleport>
 </template>
 
 <style lang='scss'>
