@@ -1,7 +1,16 @@
 body
 {
-	background-color: $primary;
+	color: $white;
 	font-family: $Manrope;
+	background-color: $primary;
 
 	&:has(.popup-wr) { @include pr(); }
+}
+
+.container
+{
+	width: 100%;
+	margin: 0 auto;
+	max-width: 1440px;
+	padding-top: 48px;
 }

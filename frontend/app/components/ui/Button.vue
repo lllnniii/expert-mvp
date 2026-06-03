@@ -35,6 +35,9 @@
 		:disabled
 		:to
 	>
+		<span class="icon">
+			<slot name="icon" />
+		</span>
 		<slot />
 	</component>
 </template>
@@ -44,7 +47,7 @@
 	{
 		width: max-content;
 		padding: 14px 20px;
-		column-gap: 10%;
+		column-gap: 10px;
 		line-height: 19px;
 		font-weight: 600;
 		border-radius: 10px;
@@ -54,7 +57,7 @@
 
 		@include tr(.3, opacity, box-shadow, background-color, transform);
 
-		&:hover { transform: translateY(2px); }
+		&:active { transform: translateY(2px) scale(0.98); }
 
 		&:disabled
 		{
@@ -73,12 +76,12 @@
 		&--gray
 		{
 			color: $white;
-			box-shadow: inset 0 0 1px 1px $light-gray;
+			box-shadow: inset 0 0 0 1px $light-gray;
 			background-color: $dark-gray;
 
 			&:hover
 			{
-				box-shadow: inset 0 0 1px 1px darken($dark-gray, 1);
+				box-shadow: inset 0 0 0 1px darken($dark-gray, 1);
 				background-color: darken($dark-gray, 1);
 			}
 		}
@@ -87,12 +90,24 @@
 		{
 			color: $white;
 			background-color: $primary;
-			box-shadow: inset 0 0 1px 0.5px $dark;
+			box-shadow: inset 0 0 0 1px $dark;
 
 			&:hover
 			{
-				box-shadow: inset 0 0 3px 2px $dark;
+				box-shadow: inset 0 0 0 2px $dark;
 			}
+		}
+
+		.icon
+		{
+			width: 14px;
+			height: 14px;
+
+			display: flex;
+			flex-shrink: 0;
+			align-items: center;
+			justify-content: center;
+
 		}
 	}
 </style>

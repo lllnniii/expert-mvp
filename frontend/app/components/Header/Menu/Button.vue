@@ -19,14 +19,10 @@
 		variant="gray"
 		@click="toggleMenu(!isOpened)"
 	>
-		<div class="menu-button">
-			<div class="menu-icon">
-				<span />
-				<span />
-				<span />
-			</div>
-			<span class="label">Меню</span>
-		</div>
+		<template #icon>
+			<IconsBurger />
+		</template>
+		Меню
 	</UiButton>
 
 	<Transition name="fade-left">
@@ -36,29 +32,3 @@
 		/>
 	</Transition>
 </template>
-
-<style scoped lang='scss'>
-	.menu-button
-	{
-		column-gap: 10px;
-
-		display: flex;
-		align-items: center;
-	}
-
-	.menu-icon
-	{
-		row-gap: 3px;
-
-		display: flex;
-		flex-direction: column;
-
-		span
-		{
-			width: 16px;
-			height: 2px;
-			border-radius: 1px;
-			background-color: $white;
-		}
-	}
-</style>

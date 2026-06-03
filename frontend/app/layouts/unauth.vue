@@ -1,3 +1,17 @@
+<script setup>
+	const nuxtApp   = useNuxtApp();
+
+	const isLoading = ref(false);
+
+	nuxtApp.hook("page:start", () => isLoading.value = true);
+	nuxtApp.hook("page:finish", () =>
+		{
+			getScrollWidth();
+			isLoading.value = false;
+		}
+	);
+</script>
+
 <template>
 	<div class="default-layout">
 		<main>
@@ -6,6 +20,8 @@
 			</Transition>
 		</main>
 	</div>
+
+	<Loader v-if="isLoading" />
 
 	<Teleport to="body">
 		<Toaster />

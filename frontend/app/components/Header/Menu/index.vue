@@ -27,7 +27,7 @@
 					class="close"
 					@click="emit('toggleMenu', false)"
 				>
-					<IconsClose />
+					<template #icon><IconsClose /></template>
 				</UiButton>
 			</div>
 
@@ -57,6 +57,7 @@
 	{
 		width: 100%;
 		height: 100%;
+		z-index: 1;
 
 		top: 0;
 		left: 0;

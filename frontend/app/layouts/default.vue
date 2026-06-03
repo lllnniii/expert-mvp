@@ -4,7 +4,15 @@
 
 	useSeoMeta({ title: 'PromExpert' });
 
-	nuxtApp.hook("page:finish", () => getScrollWidth());
+	const isLoading = ref(false);
+
+	nuxtApp.hook("page:start", () => isLoading.value = true);
+	nuxtApp.hook("page:finish", () =>
+		{
+			getScrollWidth();
+			isLoading.value = false;
+		}
+	);
 
 	if (!userStore.user?.id)
 		await userStore.getCurrentUser();
@@ -13,12 +21,14 @@
 <template>
 	<div class="default-layout">
 		<Header />
-		<main>
+		<main class="container">
 			<Transition name="fade" mode="out-in">
 				<NuxtPage />
 			</Transition>
 		</main>
 	</div>
+
+	<Loader v-if="isLoading" />
 
 	<Teleport to="body">
 		<Toaster />

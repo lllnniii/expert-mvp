@@ -51,18 +51,23 @@
 		<form class="form">
 			<div class="title">Регистрация</div>
 			<UiInput
-				type="text"
+				variant="small"
 				:error="r$.$errors.username[0]"
 				placeholder="Введите логин"
 				v-model="form.username"
-			/>
+			>
+				<IconsUser />
+			</UiInput>
 			<UiInput
 				type="password"
+				variant="small"
 				:error="r$.$errors.password[0]"
 				placeholder="Введите пароль"
 				v-model="form.password"
 				@keyup.enter="registration"
-			/>
+			>
+				<IconsLock />
+			</UiInput>
 			<div class="buttons">
 				<UiButton
 					@click="registration"

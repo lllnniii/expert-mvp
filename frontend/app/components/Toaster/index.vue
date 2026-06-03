@@ -1,7 +1,5 @@
 <script setup>
 	const toastsStore = useToastsStore();
-
-	toastsStore.addToast('Авторизация успешно провалена', 'info');
 </script>
 
 <template>
@@ -22,6 +20,7 @@
 <style scoped lang='scss'>
 	.wrapper
 	{
+		z-index: 2;
 		transform: translateX(50%);
 
 		top: 30px;
