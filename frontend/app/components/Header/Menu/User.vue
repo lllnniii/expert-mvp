@@ -40,7 +40,9 @@
 			:disabled="isLoading"
 			@click="logout"
 		>
-			<template #icon><IconsLogout /></template>
+			<template #icon>
+				<IconsLogout />
+			</template>
 		</UiButton>
 	</div>
 </template>

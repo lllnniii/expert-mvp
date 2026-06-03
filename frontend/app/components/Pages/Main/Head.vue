@@ -14,13 +14,17 @@
 					variant="dark"
 					@click="toastsStore.addToast('Пока не работает', 'info')"
 				>
-					<template #icon><IconsExport /></template>
+					<template #icon>
+						<IconsExport />
+					</template>
 					Экспорт
 				</UiButton>
 				<UiButton
 					variant="green"
 				>
-					<template #icon><IconsPlus/></template>
+					<template #icon>
+						<IconsPlus/>
+					</template>
 					Добавить объект
 				</UiButton>
 			</div>
