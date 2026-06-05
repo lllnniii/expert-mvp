@@ -35,6 +35,7 @@
 	);
 
 	const isLoading            = ref(false);
+	const isNewClient          = ref(false);
 	const currentClientId      = ref(null);
 	const currentOPOCategoryId = ref(null);
 
@@ -51,6 +52,8 @@
 		currentOPOCategoryId.value   = id;
 		newObject.value.oposCategory = id;
 	};
+
+	const changeIsNewClient = () => isNewClient.value = !isNewClient.value;
 
 	const addObject = async () =>
 	{
@@ -79,54 +82,72 @@
 			<IconsClose class="close" @click="closeCurrentPopup" />
 		</div>
 
-		<div class="body">
-			<div class="inputs">
-				<UiInput
-					placeholder="Название объекта"
-					variant="small"
-					v-model="newObject.objectName"
+		<div class="content">
+			<div class="body" :class="{ 'active': isNewClient }">
+				<div class="inputs">
+					<UiInput
+						placeholder="Название объекта"
+						variant="small"
+						v-model="newObject.objectName"
+					/>
+					<UiInput
+						placeholder="Адрес объекта"
+						variant="small"
+						v-model="newObject.objectAddress"
+					/>
+					<UiSelect
+						:items="clientsStore.clients"
+						placeholder="Клиент"
+						:currentItemId="currentClientId"
+						textFieldName="name"
+						@chooseSelectItem="chooseClient"
+						:error="r$.$errors.clientId[0]"
+					/>
+					<UiSelect
+						:items="OPOCategories"
+						placeholder="Категория ОПО"
+						:currentItemId="currentOPOCategoryId"
+						textFieldName="text"
+						@chooseSelectItem="chooseOPOCategory"
+					/>
+				</div>
+				<UiTextarea
+					class="description"
+					placeholder="Описание"
+					v-model="newObject.description"
 				/>
-				<UiInput
-					placeholder="Адрес объекта"
-					variant="small"
-					v-model="newObject.objectAddress"
-				/>
-				<UiSelect
-					:items="clientsStore.clients"
-					placeholder="Клиент"
-					:currentItemId="currentClientId"
-					textFieldName="name"
-					@chooseSelectItem="chooseClient"
-					:error="r$.$errors.clientId[0]"
-				/>
-				<UiSelect
-					:items="OPOCategories"
-					placeholder="Категория ОПО"
-					:currentItemId="currentOPOCategoryId"
-					textFieldName="text"
-					@chooseSelectItem="chooseOPOCategory"
-				/>
+				<div class="new-client">
+					<input
+						type="checkbox"
+						id="isNewClient"
+						:checked="isNewClient"
+						@change="changeIsNewClient"
+					/>
+					<label for="isNewClient">Новый клиент?</label>
+				</div>
+				<div class="buttons">
+					<UiButton
+						variant="green"
+						:disabled="isLoading"
+						@click="addObject"
+					>
+						Добавить
+					</UiButton>
+					<UiButton
+						variant="dark"
+						@click="closeCurrentPopup"
+					>
+						Отменить
+					</UiButton>
+				</div>
 			</div>
-			<UiTextarea
-				class="description"
-				placeholder="Описание"
-				v-model="newObject.description"
-			/>
-		</div>
-		<div class="buttons">
-			<UiButton
-				variant="green"
-				:disabled="isLoading"
-				@click="addObject"
-			>
-				Добавить
-			</UiButton>
-			<UiButton
-				variant="dark"
-				@click="closeCurrentPopup"
-			>
-				Отменить
-			</UiButton>
+
+			<Transition name="fade-left">
+				<PopupsAddObjectClient
+					v-if="isNewClient"
+					@close="changeIsNewClient"
+				/>
+			</Transition>
 		</div>
 	</div>
 </template>
@@ -136,6 +157,7 @@
 	{
 		border: 1px solid rgba($green, 0.5);
 		padding: 30px;
+		overflow-x: hidden;
 		border-radius: 15px;
 		background-color: $primary;
 	}
@@ -169,13 +191,35 @@
 		&:hover { color: $red; }
 	}
 
+	.content
+	{
+		column-gap: 40px;
+
+		display: flex;
+	}
+
 	.body
 	{
 		gap: 20px;
-		margin-bottom: 20px;
 
 		display: flex;
+		position: relative;
 		flex-direction: column;
+
+		&.active
+		{
+			&::before
+			{
+				width: 1px;
+				height: 100%;
+				content: '';
+				background-color: $light-gray;
+
+				position: absolute;
+				right: calc(0% - 20px);
+				top: 0;
+			}
+		}
 	}
 
 	.inputs
@@ -185,6 +229,13 @@
 		display: grid;
 		grid-template-columns: repeat(2, 200px);
 		grid-template-rows: repeat(2, 1fr);
+	}
+
+	.new-client
+	{
+		column-gap: 10px;
+
+		display: flex;
 	}
 
 	.buttons

@@ -1,5 +1,5 @@
 <script setup>
-	defineProps(
+	const props = defineProps(
 		{
 			label:
 			{
@@ -29,17 +29,48 @@
 			{
 				type     : String,
 				required : false
+			},
+			onlyNumbers:
+			{
+				type     : Boolean,
+				required : false,
+				default  : false
+			},
+			maxLength:
+			{
+				type     : Number,
+				required : false,
+			},
+			mask:
+			{
+				type     : String,
+				required : false
 			}
 		}
 	);
 
 	const model = defineModel();
 
-	const inputHandler = (e) =>
-	{
-		const inputValue = e.target.value;
+	const keydownHandler = (e) => {
+		if (props.onlyNumbers) {
+			const allowedKeys = ['Backspace', 'Delete', 'Tab', 'Escape', 'Enter', 'ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Home', 'End'];
+
+			if (allowedKeys.includes(e.key))
+				return;
+
+			if ((e.ctrlKey || e.metaKey) && ['a', 'c', 'v', 'x'].includes(e.key.toLowerCase()))
+				return;
+
+			if (!/^\d$/.test(e.key))
+				e.preventDefault();
+		}
+	};
+
+	const inputHandler = (e) => {
+		let inputValue = e.target.value;
+
 		model.value = inputValue;
-	}
+	};
 </script>
 
 <template>
@@ -56,7 +87,11 @@
 			:type
 			:placeholder
 			:value="model"
+			:maxlength="maxLength"
+			:inputmode="onlyNumbers ? 'numeric' : undefined"
+			v-mask="mask"
 			@input="inputHandler"
+			@keydown="keydownHandler"
 		/>
 		<span v-if="$slots.default" class="icon">
 			<slot />

@@ -1,4 +1,4 @@
-import AddObject from "~/components/popups/AddObject.vue";
+import AddObject from "~/components/popups/AddObject/index.vue";
 
 const popups = { 'addObject' : AddObject };
 

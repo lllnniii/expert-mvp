@@ -14,11 +14,14 @@ export const useClientsStore = defineStore('clients', () =>
 
 		const setClients = (data) => clients.value = data.map(client => clientSerializer(client));
 
+		const addClient = (client) => clients.value.push(clientSerializer(client));
+
 		return {
 			clients,
 
 			getClients,
-			setClients
+			setClients,
+			addClient
 		}
 	}
 )
