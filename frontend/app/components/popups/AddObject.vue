@@ -1,11 +1,8 @@
 <script setup>
 	const { closeCurrentPopup } = usePopupsStore();
-	const clientsStore = useClientsStore();
-	const { objects } = useApi();
-
-	const {
-		requiredField,
-	} = useValidation();
+	const clientsStore          = useClientsStore();
+	const { objects }           = useApi();
+	const { requiredField }     = useValidation();
 
 	const OPOCategories =
 	[
