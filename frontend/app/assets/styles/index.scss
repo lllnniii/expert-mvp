@@ -4,7 +4,7 @@ body
 	font-family: $Manrope;
 	background-color: $primary;
 
-	&:has(.popup-wr) { @include pr(); }
+	&:has(.popup-wrapper) { @include pr(); }
 }
 
 .container

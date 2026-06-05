@@ -17,6 +17,13 @@ export default {
 		}
 	),
 
+	refresh: async (token) => await useRequest('/account/refresh/',
+		{
+			method: 'POST',
+			body: { refresh_token: token }
+		}
+	),
+
 	getCurrentUser: async () => await useRequest('/account/me'),
 
 	logout: async (refreshToken) => await useRequest('/account/logout',

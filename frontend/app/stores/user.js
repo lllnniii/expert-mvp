@@ -18,6 +18,12 @@ export const useUserStore = defineStore('user', () =>
 			return response;
 		}
 
+		const refresh = async (token) =>
+		{
+			const response = await account.refresh(token);
+			return response;
+		}
+
 		const setUserData = (value) => user.value = value;
 
 		const getCurrentUser = async () =>
@@ -35,6 +41,7 @@ export const useUserStore = defineStore('user', () =>
 
 			login,
 			logout,
+			refresh,
 			registration,
 			getCurrentUser
 		}

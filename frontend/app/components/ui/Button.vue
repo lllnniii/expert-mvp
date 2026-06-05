@@ -65,6 +65,11 @@
 			opacity: 0.3;
 		}
 
+		&:has(svg)
+		{
+			.icon { display: flex; }
+		}
+
 		&--green
 		{
 			color: $primary;
@@ -103,7 +108,7 @@
 			width: 14px;
 			height: 14px;
 
-			display: flex;
+			display: none;
 			flex-shrink: 0;
 			align-items: center;
 			justify-content: center;

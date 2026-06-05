@@ -1,5 +1,8 @@
 <script setup>
-	const toastsStore = useToastsStore();
+	const toastsStore     = useToastsStore();
+	const { togglePopup } = usePopupsStore();
+
+	const openAddObjectPopup = () => togglePopup('addObject', true);
 </script>
 
 <template>
@@ -21,6 +24,7 @@
 				</UiButton>
 				<UiButton
 					variant="green"
+					@click="openAddObjectPopup"
 				>
 					<template #icon>
 						<IconsPlus/>

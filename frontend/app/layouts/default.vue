@@ -15,7 +15,25 @@
 	);
 
 	if (!userStore.user?.id)
-		await userStore.getCurrentUser();
+	{
+		try { await userStore.getCurrentUser(); }
+		catch (err)
+		{
+			const refreshToken = useCookie("promTokenRefresh");
+
+			if (refreshToken.value)
+			{
+				try { await userStore.refresh(refreshToken.value); }
+				catch (err)
+				{
+					console.error(err)
+					navigateTo('/login')
+				}
+			}
+			else
+				navigateTo('/login');
+		}
+	}
 </script>
 
 <template>
@@ -33,6 +51,8 @@
 	<Teleport to="body">
 		<Toaster />
 	</Teleport>
+
+	<PopupContainer />
 </template>
 
 <style lang='scss'>

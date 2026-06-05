@@ -1,9 +1,24 @@
-export const useRequestError = (error, showToast = true) =>
-{
-	let toastsStore = showToast ? useToastsStore() : null;
+export const useRequestError = (error, showToast = true) => {
+	const toastsStore = useToastsStore();
 
-	if (toastsStore && error.data?.detail)
-		toastsStore.addToast(error.data?.detail, 'error');
+	const detail = error.data?.detail;
+	let message  = 'Произошла неизвестная ошибка';
+
+	if (detail) {
+		if (Array.isArray(detail))
+		{
+			message = detail
+				.map(item => item?.msg ?? String(item))
+				.join('; ');
+		}
+		else if (typeof detail === 'object' && 'msg' in detail)
+			message = detail.msg;
+		else
+			message = typeof detail === 'string' ? detail : JSON.stringify(detail);
+	}
+
+	if (showToast && toastsStore && detail)
+		toastsStore.addToast(message, 'error');
 
 	console.error(error);
 };
