@@ -20,7 +20,7 @@ class ObjectResponse(BaseModel):
     object_address: Optional[str] = None
     opos_category: Optional[str] = None
     description: Optional[str] = None
-    client: ClientResponse
+    clients: ClientResponse
     class Config:
         from_attributes = True
 
