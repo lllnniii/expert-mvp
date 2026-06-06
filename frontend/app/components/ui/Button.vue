@@ -61,8 +61,8 @@
 
 		&:disabled
 		{
-			pointer-events: none;
 			opacity: 0.3;
+			pointer-events: none;
 		}
 
 		&:has(svg)

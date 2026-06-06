@@ -25,6 +25,7 @@
 						:id="object.id"
 						:name="object.name"
 						:address="object.address"
+						:description="object.description"
 						:clientName="object?.client?.name"
 						:oposCategory="object.oposCategory"
 					/>

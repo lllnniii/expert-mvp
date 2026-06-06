@@ -152,6 +152,7 @@
 	.content
 	{
 		width: 100%;
+		border: 1px solid $light-gray;
 		row-gap: 5px;
 		padding: 10px;
 		max-height: 150px;

@@ -2,6 +2,7 @@
 	const { objects : objectsApi } = useApi();
 	const { addToast }             = useToastsStore();
 	const objectsStore             = useObjectsStore();
+	const popupsStore              = usePopupsStore();
 
 	const props = defineProps(
 		{
@@ -29,6 +30,11 @@
 			{
 				type     : String,
 				required : true
+			},
+			description:
+			{
+				type     : String,
+				required : true
 			}
 		}
 	);
@@ -50,7 +56,21 @@
 		}
 		catch (err) { useRequestError(err) }
 		finally { isLoading.value = false; }
-	}
+	};
+
+	const openEditObjectPopup = () =>
+	{
+		popupsStore.togglePopup('editObject', true);
+		popupsStore.setPopupData(
+			{
+				id           : props.id,
+				name         : props.name,
+				address      : props.address,
+				description  : props.description,
+				oposCategory : props.oposCategory
+			}
+		);
+	};
 </script>
 
 <template>
@@ -89,7 +109,10 @@
 					<IconsEye />
 				</template>
 			</UiButton>
-			<UiButton variant="dark">
+			<UiButton
+				variant="dark"
+				@click="openEditObjectPopup"
+			>
 				<template #icon>
 					<IconsEdit />
 				</template>

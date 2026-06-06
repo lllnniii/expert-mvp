@@ -15,5 +15,18 @@ export default {
 		}
 	),
 
-	deleteObject: async (id) => await useRequest(`/objects/${id}`, { method: 'DELETE' })
+	deleteObject: async (id) => await useRequest(`/objects/${id}`, { method: 'DELETE' }),
+
+	changeObject: async (payload) => await useRequest(`/objects/${payload.id}`,
+		{
+			method: 'PATCH',
+			body:
+			{
+				description    : payload.description,
+				object_name    : payload.name,
+				opos_category  : payload.oposCategory,
+				object_address : payload.address
+			}
+		}
+	)
 }

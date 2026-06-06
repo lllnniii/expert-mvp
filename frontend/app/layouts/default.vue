@@ -23,7 +23,13 @@
 
 			if (refreshToken.value)
 			{
-				try { await userStore.refresh(refreshToken.value); }
+				try
+				{
+					const response = await userStore.refresh(refreshToken.value);
+
+					if (response.refresh_token)
+						refreshToken.value = response.refresh_token;
+				}
 				catch (err)
 				{
 					console.error(err)

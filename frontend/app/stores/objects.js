@@ -14,18 +14,26 @@ export const useObjectsStore = defineStore('objects', () =>
 
 		const setObjects = (data) => objects.value = data.map(object => objectSerializer(object));
 
-		const addObject = (object) =>
-			{
-				objects.value.push(object)
-				console.log(objects.value);
-			};
+		const addObject = (object) => objects.value.push(object);
+
+		const updateObject = (updatedObject) =>
+		{
+			const serializedObject = objectSerializer(updatedObject);
+			const index            = objects.value.findIndex(obj => obj.id === serializedObject.id);
+
+			if (index !== -1)
+				objects.value[index] = serializedObject;
+			else
+				objects.value.push(serializedObject);
+		};
 
 		return {
 			objects,
 
 			addObject,
 			getObjects,
-			setObjects
+			setObjects,
+			updateObject
 		}
 	}
 );

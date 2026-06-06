@@ -1,5 +1,6 @@
 <script setup>
 	import { objectSerializer } from '~/utils/serializers/objectSerializer';
+	import oposCategories from '~/assets/oposCategories';
 
 	const { closeCurrentPopup }       = usePopupsStore();
 	const clientsStore                = useClientsStore();
@@ -7,26 +8,6 @@
 	const { addToast }                = useToastsStore();
 	const { objects }                 = useApi();
 	const { requiredField }           = useValidation();
-
-	const OPOCategories =
-	[
-		{
-			id   : 1,
-			text : '1 Класс'
-		},
-		{
-			id   : 2,
-			text : "2 Класс"
-		},
-		{
-			id   : 3,
-			text : '3 Класс'
-		},
-		{
-			id   : 4,
-			text : "4 Класс"
-		}
-	];
 
 	const newObject = ref(
 		{
@@ -54,7 +35,7 @@
 	const chooseOPOCategory = (id) =>
 	{
 		currentOPOCategoryId.value   = id;
-		newObject.value.oposCategory = OPOCategories.filter(category => category.id === id)[0].text;
+		newObject.value.oposCategory = oposCategories.filter(category => category.id === id)[0].text;
 	};
 
 	const changeIsNewClient = () => isNewClient.value = !isNewClient.value;
@@ -87,10 +68,7 @@
 
 <template>
 	<div class="wrapper">
-		<div class="header">
-			<p class="title">Добавить объект</p>
-			<IconsClose class="close" @click="closeCurrentPopup" />
-		</div>
+		<PopupsHeader title="Добавить объект" />
 
 		<div class="content">
 			<div class="body" :class="{ 'active': isNewClient }">
@@ -114,7 +92,7 @@
 						:error="r$.$errors.clientId[0]"
 					/>
 					<UiSelect
-						:items="OPOCategories"
+						:items="oposCategories"
 						placeholder="Категория ОПО"
 						:currentItemId="currentOPOCategoryId"
 						textFieldName="text"
@@ -170,35 +148,6 @@
 		overflow-x: hidden;
 		border-radius: 15px;
 		background-color: $primary;
-	}
-
-	.header
-	{
-		column-gap: 20px;
-		margin-bottom: 30px;
-
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-	}
-
-	.title
-	{
-		font-size: 24px;
-		line-height: 100%;
-		font-weight: 500;
-	}
-
-	.close
-	{
-		width: 16px;
-		height: 16px;
-		cursor: pointer;
-		color: rgba($red, 0.3);
-
-		@include tr(0.3, color);
-
-		&:hover { color: $red; }
 	}
 
 	.content
