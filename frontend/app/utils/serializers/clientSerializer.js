@@ -1,5 +1,7 @@
 export const clientSerializer = (client) =>
 {
+	if (!client.client_id) return {};
+
 	return {
 		id            : client.client_id,
 		inn           : client.inn,

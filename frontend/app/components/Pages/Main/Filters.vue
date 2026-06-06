@@ -24,7 +24,7 @@
 		<UiInput
 			class="input"
 			v-model="model"
-			placeholder="Поиск объекта по названию, ID, клиенту…"
+			placeholder="Поиск объекта по названию"
 		>
 			<IconsMagnifier />
 		</UiInput>

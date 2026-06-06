@@ -1,4 +1,6 @@
 export default {
+	getObjects: async () => await useRequest('/objects'),
+
 	addObject: async (payload) => await useRequest('/objects',
 		{
 			method: 'POST',
@@ -11,5 +13,7 @@ export default {
 				object_address : payload.objectAddress
 			}
 		}
-	)
+	),
+
+	deleteObject: async (id) => await useRequest(`/objects/${id}`, { method: 'DELETE' })
 }

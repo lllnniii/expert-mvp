@@ -1,8 +1,12 @@
 <script setup>
-	const { closeCurrentPopup } = usePopupsStore();
-	const clientsStore          = useClientsStore();
-	const { objects }           = useApi();
-	const { requiredField }     = useValidation();
+	import { objectSerializer } from '~/utils/serializers/objectSerializer';
+
+	const { closeCurrentPopup }       = usePopupsStore();
+	const clientsStore                = useClientsStore();
+	const { addObject: addNewObject } = useObjectsStore();
+	const { addToast }                = useToastsStore();
+	const { objects }                 = useApi();
+	const { requiredField }           = useValidation();
 
 	const OPOCategories =
 	[
@@ -50,7 +54,7 @@
 	const chooseOPOCategory = (id) =>
 	{
 		currentOPOCategoryId.value   = id;
-		newObject.value.oposCategory = id;
+		newObject.value.oposCategory = OPOCategories.filter(category => category.id === id)[0].text;
 	};
 
 	const changeIsNewClient = () => isNewClient.value = !isNewClient.value;
@@ -66,7 +70,13 @@
 
 		try {
 			const response = await objects.addObject(newObject.value);
-			console.log(response);
+
+			if (response.object_id)
+			{
+				addNewObject(objectSerializer(response));
+				addToast('Объект добавлен', 'success');
+				closeCurrentPopup();
+			}
 		}
 		catch (err) { useRequestError(err) }
 		finally { isLoading.value = false; }
