@@ -65,11 +65,11 @@
 		popupsStore.togglePopup('editObject', true);
 		popupsStore.setPopupData(
 			{
-				id: props.id,
-				name: props.name,
-				address: props.address,
-				description: props.description,
-				oposCategory: props.oposCategory
+				id           : props.id,
+				name         : props.name,
+				address      : props.address,
+				description  : props.description,
+				oposCategory : props.oposCategory
 			}
 		);
 	};
@@ -195,23 +195,24 @@
 
 				.label
 				{
-					display: block;
 					color: $light-gray-text;
 					font-size: 11px;
 					font-weight: 700;
+					margin-bottom: 8px;
 					text-transform: uppercase;
 					letter-spacing: 0.5px;
-					margin-bottom: 8px;
+
+					display: block;
 				}
 
 				.text
 				{
 					color: $white;
-					font-size: 13px;
-					line-height: 1.6;
 					margin: 0;
-					white-space: pre-wrap;
+					font-size: 13px;
 					word-break: break-word;
+					line-height: 1.6;
+					white-space: pre-wrap;
 				}
 			}
 		}
@@ -240,6 +241,7 @@
 	{
 		width: 244px;
 		column-gap: 10px;
+
 		display: flex;
 		align-items: center;
 
@@ -274,6 +276,7 @@
 			column-gap: 8px;
 			border-radius: 100px;
 			background-color: $primary;
+
 			display: flex;
 			align-items: center;
 		}
@@ -314,6 +317,7 @@
 	{
 		width: 161px;
 		column-gap: 6px;
+
 		display: flex;
 		justify-content: flex-end;
 
