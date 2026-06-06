@@ -1,8 +1,8 @@
 <script setup>
-	const { objects : objectsApi } = useApi();
-	const { addToast }             = useToastsStore();
-	const objectsStore             = useObjectsStore();
-	const popupsStore              = usePopupsStore();
+	const { objects: objectsApi } = useApi();
+	const { addToast }            = useToastsStore();
+	const objectsStore            = useObjectsStore();
+	const popupsStore             = usePopupsStore();
 
 	const props = defineProps(
 		{
@@ -35,17 +35,19 @@
 			{
 				type     : String,
 				required : true
-			}
+			 }
 		}
 	);
 
-	const isLoading = ref(false);
+	const isLoading  = ref(false);
+	const isExpanded = ref(false);
 
 	const deleteObject = async () =>
 	{
 		isLoading.value = true;
 
-		try {
+		try
+		{
 			const response = await objectsApi.deleteObject(props.id);
 
 			if (!response?.detail)
@@ -54,7 +56,7 @@
 				addToast('Объект удален', 'success');
 			}
 		}
-		catch (err) { useRequestError(err) }
+		catch (err) { useRequestError(err); }
 		finally { isLoading.value = false; }
 	};
 
@@ -63,14 +65,16 @@
 		popupsStore.togglePopup('editObject', true);
 		popupsStore.setPopupData(
 			{
-				id           : props.id,
-				name         : props.name,
-				address      : props.address,
-				description  : props.description,
-				oposCategory : props.oposCategory
+				id: props.id,
+				name: props.name,
+				address: props.address,
+				description: props.description,
+				oposCategory: props.oposCategory
 			}
 		);
 	};
+
+	const toggleExpand = () => isExpanded.value = !isExpanded.value;
 </script>
 
 <template>
@@ -96,19 +100,27 @@
 			class="opos"
 			:class="getOposCategoryClassName(oposCategory)"
 		>
-			<span class="info">
+			<span
+				v-if="oposCategory"
+				class="info"
+			>
 				<span class="indicator" />
 				<span class="text">
 					{{ oposCategory }} ОПО
 				</span>
 			</span>
 		</td>
+
 		<td class="buttons">
-			<UiButton variant="dark">
+			<UiButton
+				variant="dark"
+				@click="toggleExpand"
+			>
 				<template #icon>
 					<IconsEye />
 				</template>
 			</UiButton>
+
 			<UiButton
 				variant="dark"
 				@click="openEditObjectPopup"
@@ -117,6 +129,7 @@
 					<IconsEdit />
 				</template>
 			</UiButton>
+
 			<UiButton
 				variant="dark"
 				@click="deleteObject"
@@ -127,6 +140,17 @@
 			</UiButton>
 		</td>
 	</tr>
+
+	<Transition name="fade">
+		<tr v-if="isExpanded" class="expanded-row">
+			<td colspan="6" class="description-cell">
+				<div class="description-content">
+					<span class="label">Описание объекта:</span>
+					<p class="text">{{ description || 'Описание отсутствует' }}</p>
+				</div>
+			</td>
+		</tr>
+	</Transition>
 </template>
 
 <style scoped lang='scss'>
@@ -154,6 +178,45 @@
 		&:last-child { padding: 0 18px; }
 	}
 
+	.expanded-row
+	{
+		background-color: darken($dark-gray, 2%);
+
+		.description-cell
+		{
+			padding: 0 18px 24px 18px;
+
+			.description-content
+			{
+				background-color: rgba($white, 0.03);
+				border-left: 3px solid $green;
+				border-radius: 0 8px 8px 0;
+				padding: 16px 20px;
+
+				.label
+				{
+					display: block;
+					color: $light-gray-text;
+					font-size: 11px;
+					font-weight: 700;
+					text-transform: uppercase;
+					letter-spacing: 0.5px;
+					margin-bottom: 8px;
+				}
+
+				.text
+				{
+					color: $white;
+					font-size: 13px;
+					line-height: 1.6;
+					margin: 0;
+					white-space: pre-wrap;
+					word-break: break-word;
+				}
+			}
+		}
+	}
+
 	.id
 	{
 		color: $light-gray-text;
@@ -177,7 +240,6 @@
 	{
 		width: 244px;
 		column-gap: 10px;
-
 		display: flex;
 		align-items: center;
 
@@ -212,7 +274,6 @@
 			column-gap: 8px;
 			border-radius: 100px;
 			background-color: $primary;
-
 			display: flex;
 			align-items: center;
 		}
@@ -253,14 +314,12 @@
 	{
 		width: 161px;
 		column-gap: 6px;
-
 		display: flex;
 		justify-content: flex-end;
 
 		button
 		{
 			padding: 8px;
-
 			color: $gray;
 		}
 	}
